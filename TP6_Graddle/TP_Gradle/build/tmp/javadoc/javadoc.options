@@ -1,0 +1,10 @@
+-classpath '/home/ludmila/IdeaProjects/TP_Gradle/build/classes/java/main:/home/ludmila/IdeaProjects/TP_Gradle/build/resources/main'
+-d '/home/ludmila/IdeaProjects/TP_Gradle/build/docs/javadoc'
+-doctitle 'TP_Gradle 1.0-SNAPSHOT API'
+-html5 
+-notimestamp 
+-quiet 
+-windowtitle 'TP_Gradle 1.0-SNAPSHOT API'
+'/home/ludmila/IdeaProjects/TP_Gradle/src/main/java/com/example/model/Matrix.java'
+'/home/ludmila/IdeaProjects/TP_Gradle/src/main/java/com/example/service/MatrixMathematics.java'
+'/home/ludmila/IdeaProjects/TP_Gradle/src/main/java/com/example/exception/NoSquareException.java'

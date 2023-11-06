@@ -1,0 +1,90 @@
+// Importer les Plugins
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.25"
+    id "org.sonarqube" version "3.5.0.2730"
+    id 'maven-publish'
+    id "net.madeng.slack" version "0.0.21"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+// Definir le dossier dans lequel le rapport de test se trouvera
+cucumberReports {
+    outputDir = file('build/reports/cucumber')
+    buildId = '0'
+    reports = files('reports/example-report.json')
+}
+
+// Definir les dependences
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:6.0.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.0.0'
+    testImplementation'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
+}
+
+// Le lancement des tests implique le lancement de l’analyse du code après avec SonarQube
+test.finalizedBy tasks["sonarqube"]
+
+// Generer la documentation avec javadoc
+javadoc {
+    options.addBooleanOption('html5', true)
+    source = sourceSets.main.allJava
+}
+
+// Copier ./build/docs(/libs)(/reports) dans MatrixRealease/Matrix_v_1.0
+task generateMatrixAPI (type:Copy){
+    from{
+        "./build/docs"
+        "./build/libs"
+        "./build/reports"
+    }
+
+    into("MatrixRelease/Matrix_v_1.0")
+}
+
+// Definir les contraintes de lancement
+generateMatrixAPI.dependsOn tasks["javadoc"]
+generateMatrixAPI.dependsOn tasks["build"]
+
+// Configurer Publishing
+publishing {
+    repositories {
+        maven {
+            url 'https://mymavenrepo.com/repo/OX2M8Obw5YNhXagxrTLf/'
+            credentials {
+                username 'myMavenRepo'
+                password 'myMavenRepo'
+            }
+        }
+    }
+// Configurer Publications
+    publications {
+        maven(MavenPublication){
+            from components.java
+        }
+    }
+}
+
+// Ajouter la contrainte (pour chaque lancement de generateMatrixAPI la tâche publish doit être lancée après)
+generateMatrixAPI.finalizedBy publish
+
+// Tester et configurer Slack
+slack{
+    webhookUrl 'https://hooks.slack.com/services/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'
+    message {
+        text = "Ceci est un message indiquant le succes du deploiement"
+        channel = 'tp-gradle'
+
+    }
+}
+
+// Creer la dependence entre Publish et publishToslack
+publish.finalizedBy publishToSlack

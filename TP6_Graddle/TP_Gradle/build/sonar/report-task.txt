@@ -1,0 +1,6 @@
+projectKey=org.example:TP_Gradle
+serverUrl=http://localhost:9000
+serverVersion=7.4.0.18908
+dashboardUrl=http://localhost:9000/dashboard?id=org.example%3ATP_Gradle
+ceTaskId=AYVHN7kri4bC-BBzCXMP
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYVHN7kri4bC-BBzCXMP

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Matrix" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-12-25T02:58:27" hostname="ludmila-ThinkPad-T14-Gen-1" time="0.251">
+  <properties/>
+  <testcase name="Determinant" classname="Matrix" time="0.239"/>
+  <testcase name="Transpose" classname="Matrix" time="0.005"/>
+  <testcase name="Inverse" classname="Matrix" time="0.004"/>
+  <testcase name="Cofactor" classname="Matrix" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
